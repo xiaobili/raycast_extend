@@ -1,54 +1,46 @@
 import { List } from "@raycast/api";
-import { useCachedPromise } from "@raycast/utils";
-import { useState } from "react";
+import { useCachedPromise, useCachedState } from "@raycast/utils";
+import { useMemo, useState } from "react";
 
 import { getFilters } from "./api/filters";
-import { getIssues } from "./api/issues";
 import StatusIssueList from "./components/StatusIssueList";
 import { withJiraCredentials } from "./helpers/withJiraCredentials";
+import useIssues from "./hooks/useIssues";
 
 export function MyFilters() {
   const [query, setQuery] = useState("");
-  const [filterId, setFilterId] = useState("");
+  const [filterId, setFilterId] = useCachedState("filter-id", "");
 
   const { data: filters, isLoading: isLoadingFilters } = useCachedPromise((query) => getFilters(query), [query], {
     keepPreviousData: true,
   });
 
-  const {
-    data: issues,
-    isLoading,
-    mutate,
-  } = useCachedPromise(
-    (filterId) => {
-      const jql = filters?.find((filter) => filter.id === filterId)?.jql;
-      if (!jql) {
-        return Promise.resolve([]);
-      }
+  const jql = useMemo(() => filters?.find((filter) => filter.id === filterId)?.jql ?? "", [filters, filterId]);
 
-      return getIssues({ jql });
-    },
-    [filterId],
-    { execute: filterId !== "" }
-  );
+  const { issues, isLoading, mutate } = useIssues(jql, { execute: !!jql });
 
   const searchBarAccessory = filters ? (
     <List.Dropdown
       tooltip="Filter issues by filters"
       onChange={setFilterId}
-      storeValue
+      value={filterId}
       isLoading={isLoadingFilters}
       onSearchTextChange={setQuery}
       throttle
     >
       {filters?.map((filter) => {
-        return <List.Dropdown.Item key={filter.id} title={filter.name} value={filter.id} />;
+        return <List.Dropdown.Item key={filter.id} title={filter.name ?? "Unknown filter name"} value={filter.id} />;
       })}
     </List.Dropdown>
   ) : null;
 
   return (
-    <StatusIssueList issues={issues} isLoading={isLoading} mutate={mutate} searchBarAccessory={searchBarAccessory} />
+    <StatusIssueList
+      issues={issues}
+      isLoading={isLoading || isLoadingFilters}
+      mutate={mutate}
+      searchBarAccessory={searchBarAccessory}
+    />
   );
 }
 

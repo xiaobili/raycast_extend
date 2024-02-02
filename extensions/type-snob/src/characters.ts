@@ -366,10 +366,39 @@ const miscChars: Character[] = [
     html: "&darr;",
   },
   {
+    label: "Upper left arrow",
+    value: "↖",
+    example: "Swipe ↖ to access menu",
+    html: "&nwarr;",
+  },
+  {
+    label: "Upper right arrow",
+    value: "↗",
+    example: "Swipe ↗ to expand options",
+    html: "&nearr;",
+  },
+  {
+    label: "Lower left arrow",
+    value: "↙",
+    example: "Swipe ↙ to minimize options",
+    html: "&swarr;",
+  },
+  {
+    label: "Lower right arrow",
+    value: "↘",
+    example: "Swipe ↘ to access settings",
+    html: "&searr;",
+  },
+  {
     label: "Wavy dash",
     value: "〰",
     keywords: ["wave", "squiggle"],
     html: "&#x3030;",
+  },
+  {
+    label: "Zero-width space",
+    value: "​",
+    html: "&#x200B;",
   },
 ];
 

@@ -1,5 +1,13 @@
 # Visual Studio Code - Project Manager Changelog
 
+## [Update] - 2023-11-23
+- Add support for [Cursor](http://cursor.sh)
+
+## [Update] - 2023-04-24
+
+- Update build identifier for VSCodium. (VSCodium/vscodium#1227)
+- Add option for `VSCodium < 1.71` to maintain old build identifier.
+
 ## [Update] - 2023-03-30
 
 - Add support for VS Code cached projects.

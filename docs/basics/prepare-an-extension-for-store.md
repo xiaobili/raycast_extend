@@ -162,7 +162,7 @@ You can use [Raycast Wallpapers](https://www.raycast.com/wallpapers) to make you
 ```markdown
 # Brew Changelog
 
-## [Added a bunch of new feedback] - 2022-01-17
+## [Added a bunch of new feedback] - 2023-01-17
 
 - Improve reliability of `outdated` command
 - Add action to copy formula/cask name
@@ -245,7 +245,7 @@ You can use [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) to help you
   - ❌ `Copy url`, `set project`, `Set priority`
 - Provide icons for actions if there are other actions with icons in the list
   - Avoid having a list of actions where some have icons and some don't
-- Add ellipses `…` for actions that will have a submenu. Don't repeat parent the action name in the submenu
+- Add ellipses `…` for actions that will have a submenu. Don't repeat the parent action name in the submenu
   - ✅ `Set Priority…` and submenu would have `Low`, `Medium`, `High`
   - ❌ `Set Priority` and submenu would have `Set Priority Low`, `Set Priority Medium`, etc
 
